@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::group(['prefix' => 'mobilization'], function(){
+	Route::match(['get', 'post'], '/index', 'MobilizationController@index');
+});
