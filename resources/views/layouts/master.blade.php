@@ -26,37 +26,14 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="">Timeline</a></li>
-          
-            <li><a href="">Friends</a></li>
-            <li><a href="">Friends <span class="badge"></span></a></li>
-        </ul>
-        <form class="navbar-form navbar-left" action="">
-          <!--<div class="form-group">-->
-          <!--  <input type="text" class="form-control" name="query" placeholder="Find Friends">-->
-          <!--</div>-->
-          <!--<button type="submit" class="btn btn-default">Search</button>-->
-          <div class="form-group">
-            <input type="text" class="form-control" id="querySelector" name="query" placeholder="Find Someone Closeby....">
-          </div>
-          <button type="submit" class="btn btn-default">Search</button>
-          <div class="dropdown">
-                  <!--Trigger-->
-                  <!--Menu-->
-                  <div class="dropdown-menu dropdown-dark animated fadeIn" style="background-color: rgba(51,51,51,0.60); width: 100%; max-height: 150px; overflow-y: scroll; padding-left: 10px; ">
-                      
-                  </div>
-          </div>
-          
-        </form>
-        {{-- <ul class="nav navbar-nav navbar-right">
-          <li><a href=""></a></li>
-          <li><a href="">Update Profile</a></li>
-          <li><a href="">Sign Out</a></li>
-          <!--<li><a href="http://www.aocoedsu.org/developer">Developers</a></li>-->
-          <li><a href="http://www.aocoedsu.org/developer">Developers</a></li>
-        </ul> --}}
+        
+        @if(Auth::check())
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href=""></a></li>
+            {{-- <li><a href="">Update Profile</a></li> --}}
+            <li><a href="{{ route('logout') }}">Log Out</a></li>
+          </ul>
+        @endif
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
@@ -69,5 +46,20 @@
   <script src="{{ asset('js/bootstrap.js') }}"></script>
   <script src="{{ asset('js/toastr.min.js') }}"></script>
   @yield('scripts')
+  <script>
+
+    @if(Session::has('success'))
+        toastr.success("{{ Session::get('success') }}")
+    @endif
+
+    @if(Session::has('info'))
+        toastr.info("{{ Session::get('info') }}")
+    @endif
+
+    @if(Session::has('error'))
+        toastr.error("{{ Session::get('error') }}")
+    @endif
+    
+</script>
 </body>
 </html>
