@@ -56,6 +56,8 @@
                                             Payment Status
                                         </center>
                                     </th>
+                                    <th>EDIT</th>
+                                    <th>DELETE</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,13 +75,19 @@
                                             {{ $students->matric_number }}
                                         </td>
                                         <td>
-                                            {{ $students->department }}
+                                            {{ $students->department->name }}
                                         </td>
                                         <td>
-                                            {{ $students->session }}
+                                            {{ $students->academicsession->name }}
                                         </td>
                                         <td>
                                             Pending...
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('director.student.edit', ['id' => $students->id]) }}" class="btn btn-primary btn-xs">EDIT</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('director.student.delete', ['id' => $students->id]) }}" class="btn btn-danger btn-xs">DELETE</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -90,6 +98,5 @@
             </div>
             <div class="panel-footer text-center">Developed by <a href="#">Buildit.com.ng</a></div>
         </div>
-    </div>
 </div>
 @stop
