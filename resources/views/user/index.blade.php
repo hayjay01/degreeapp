@@ -1,5 +1,6 @@
 @extends('layouts.master')
 	@section('content')
+		<br> <br> <br>
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2">
 				<form method="POST" action="{{  }}">
@@ -14,8 +15,7 @@
 								  @endforeach
 								</select>
 							</div>
-						</div>  <br> <br> <br> <br> <br> <br> 
-
+						</div>  <br> <br> <br> <br> 
 						<div class="col-lg-8">
 							<div class="form-group">
 								<label for="exampleInputEmail1">Choose Department</label>
@@ -35,7 +35,7 @@
 								<label for="exampleInputEmail1">Matric Number</label>
 								<input type="text" class="form-control" name="matric_number" id="matric_number">
 							</div>
-						</div> <br> <br> <br> <br> <br> <br> 
+						</div> <br> <br> <br> <br>
 
 						<div class="col-lg-8">
 							<div class="form-group">
@@ -50,7 +50,7 @@
 					<br> <br> <br> <br>
 
 					<div class="row">
-						<div class="col-lg-3 col-lg-offset-3">
+						<div class="col-lg-3 col-lg-offset-3 col-xs-4 col-xs-offset-3 col-sm-4 col-sm-offset-4">
 
 						<input type="submit" class="btn btn-success" value="Proceed with payment">
 							
