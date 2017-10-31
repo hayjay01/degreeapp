@@ -15,20 +15,46 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 
 Route::group(['prefix' => 'mobilization'], function(){
 	Route::match(['get', 'post'], '/index', 'MobilizationController@index');
+    Route::get('/name', 'MobilizationController@getName');
 });
 
 Route::group(['prefix' => 'director'], function(){
-	Route::match(['get', 'post'], '/login', 'AuthController@getLogin')->name('login.form');
+	Route::match(['get', 'post'], '/login', 'AuthController@getLogin')->name('login');
     Route::post('/login-process', 'AuthController@postLogin')->name('login.process');
 
     Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
         Route::get('/', 'DirectorDashboardController@index')->name('dashboard');
-        Route::get('/all-students', 'DirectorDashboardController@allStudent')->name('student.all');
-        Route::get('/add-student-single', 'DirectorDashboardController@createStudent')->name('director.student');
-        Route::post('/add-student-single/post', 'DirectorDashboardController@storeStudent')->name('director.student.process');
+        Route::group(['prefix' => 'students'], function() {
+            Route::get('/', 'DirectorDashboardController@allStudent')->name('student.all');
+            Route::get('/create-single', 'DirectorDashboardController@createStudent')->name('director.student');
+            Route::post('/create-single/post', 'DirectorDashboardController@storeStudent')->name('director.student.process');
+            Route::get('/edit/{id}', 'DirectorDashboardController@editStudent')->name('director.student.edit');
+            Route::post('/edit/post/{id}', 'DirectorDashboardController@updateStudent')->name('director.student.update');
+            Route::get('/delete/{id}', 'DirectorDashboardController@deleteStudent')->name('director.student.delete');
+        });
+
+        Route::group(['prefix' => 'departments'], function() {
+            Route::get('/', 'DirectorDashboardController@allDepartment')->name('department.all');
+            Route::get('/create', 'DirectorDashboardController@createDepartment')->name('department.create');
+            Route::post('/store', 'DirectorDashboardController@storeDepartment')->name('department.store');
+            Route::get('/edit/{id}', 'DirectorDashboardController@editDepartment')->name('department.edit');
+            Route::post('/edit/post/{id}', 'DirectorDashboardController@updateDepartment')->name('department.update');
+            Route::get('/delete/{id}', 'DirectorDashboardController@deleteDepartment')->name('department.delete');
+        });
+
+        Route::group(['prefix' => 'session'], function() {
+            Route::get('/', 'DirectorDashboardController@allSession')->name('session.all');
+            Route::get('/create', 'DirectorDashboardController@createSession')->name('session.create');
+            Route::post('/store', 'DirectorDashboardController@storeSession')->name('session.store');
+            Route::get('/edit/{id}', 'DirectorDashboardController@editSession')->name('session.edit');
+            Route::post('/update/{id}', 'DirectorDashboardController@updateSession')->name('session.update');
+            Route::get('/delete/{id}', 'DirectorDashboardController@deleteSession')->name('session.delete');
+        });
+        
         Route::get('/logout', 'DirectorDashboardController@logout')->name('logout');
     });
 });

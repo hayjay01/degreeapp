@@ -44,6 +44,7 @@
 
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <script src="{{ asset('js/bootstrap.js') }}"></script>
+  <script src="{{ asset('js/main.js') }}"></script>
   <script src="{{ asset('js/toastr.min.js') }}"></script>
   @yield('scripts')
   <script>

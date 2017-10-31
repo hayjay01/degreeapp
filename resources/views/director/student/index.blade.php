@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     @include('sidebar.sidebar')
-    <div class="col-md-8">
+    <div class="col-md-9">
         <div class="panel panel-success">
             <div class="panel-heading">
                 All Students
@@ -40,6 +40,8 @@
                                     <th>
                                         Payment Status
                                     </th>
+                                    <th>EDIT</th>
+                                    <th>DELETE</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,13 +59,19 @@
                                             {{ $students->matric_number }}
                                         </td>
                                         <td>
-                                            {{ $students->department }}
+                                            {{ $students->department->name }}
                                         </td>
                                         <td>
-                                            {{ $students->session }}
+                                            {{ $students->academicsession->name }}
                                         </td>
                                         <td>
                                             Pending...
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('director.student.edit', ['id' => $students->id]) }}" class="btn btn-primary btn-xs">EDIT</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('director.student.delete', ['id' => $students->id]) }}" class="btn btn-danger btn-xs">DELETE</a>
                                         </td>
                                     </tr>
                                 @endforeach
