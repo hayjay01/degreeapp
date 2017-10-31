@@ -1,7 +1,7 @@
-<div class="col-md-4">
+<div class="col-md-3">
         <div class="panel panel-success">
             <div class="panel-heading">
-                Welcome {{ Auth::user()->name }}
+                Welcome, @if(strtolower(auth()->user()->gender) == "male") Mr. @else Mrs. @endif {{ Auth::user()->name }}
             </div>
             <div class="panel-body">
                 <ul class="list-group">

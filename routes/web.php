@@ -17,11 +17,12 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'mobilization'], function(){
-	Route::match(['get', 'post'], '/index', 'MobilizationController@index');
+	Route::match(['get', 'post'], '/index', 'MobilizationController@index')->name('mobilization');
+
 });
 
 Route::group(['prefix' => 'director'], function(){
-	Route::match(['get', 'post'], '/login', 'AuthController@getLogin')->name('login.form');
+	Route::match(['get', 'post'], '/login', 'AuthController@getLogin')->name('login');
     Route::post('/login-process', 'AuthController@postLogin')->name('login.process');
 
     Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
@@ -30,5 +31,8 @@ Route::group(['prefix' => 'director'], function(){
         Route::get('/add-student-single', 'DirectorDashboardController@createStudent')->name('director.student');
         Route::post('/add-student-single/post', 'DirectorDashboardController@storeStudent')->name('director.student.process');
         Route::get('/logout', 'DirectorDashboardController@logout')->name('logout');
+        Route::get('import-excel-bulk-upload-format', 'DirectorDashboardController@importExport');
+        Route::get('downloadExcel/{type}', 'DirectorDashboardController@downloadExcel');
+        Route::post('importExcel', 'DirectorDashboardController@importExcel');
     });
 });
