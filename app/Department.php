@@ -10,6 +10,6 @@ class Department extends Model
 
     public function student()
     {
-        return $this->belongsTo(Student::class);
+        return $this->hasMany(Student::class);
     }
 }

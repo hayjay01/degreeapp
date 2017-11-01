@@ -2,57 +2,101 @@
 	@section('content')
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2">
-				<form method="POST" action="{{  }}">
+				<form method="POST"  action="{{ route('pay') }}" accept-charset="UTF-8">
+					{{-- {{ csrf_field() }}
 					<div class="row">
 						<div class="col-lg-8">
-							<div class="form-group">
+							<div class="form-group{{ $errors->has('session') ? ' has-error' : '' }}">
 								<label for="exampleInputEmail1">Choose Session</label>
 								<select class="form-control" id="session" name="session" required>
 								  <option value="">Select Session</option>
 								  @foreach($session as $sessions)
 								  	<option value="{{ $sessions->id }}">{{ $sessions->name }}</option>
 								  @endforeach
+
+								  @if($errors->has('session'))
+								  	<strong>
+										<span class="help-block">{{ $errors->first('session') }}</span>  
+									</strong>
+								  @endif
 								</select>
 							</div>
 						</div>  <br> <br> <br> <br> <br> <br> 
 
 						<div class="col-lg-8">
-							<div class="form-group">
+							<div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
 								<label for="exampleInputEmail1">Choose Department</label>
 								<select class="form-control" id="department" name="department" required>
 									<option value="">Select Department</option>
 									@foreach($department as $dept)
 										<option value="{{ $dept->id }}">{{ $dept->name }}</option>
 									@endforeach
+
+									@if($errors->has('department'))
+										<strong>
+											<span class="help-block">{{ $errors->first('department') }}</span>
+										</strong>
+									@endif
 								</select>
 							</div>
 						</div>
-					</div> <br> <br> <br>
+					</div> <br> <br> <br> --}}
 
 					<div class="row">
 						<div class="col-lg-8">
-							<div class="form-group">
+							<div class="form-group{{ $errors->has('matric_number') ? ' has-error' : '' }}">
 								<label for="exampleInputEmail1">Matric Number</label>
 								<input type="text" class="form-control" name="matric_number" id="matric_number">
+
+								@if($errors->has('matric_number'))
+									<strong>
+										<span class="help-block">{{ $errors->first('matric_number') }}</span>
+									</strong>
+								@endif
 							</div>
 						</div> <br> <br> <br> <br> <br> <br> 
 
 						<div class="col-lg-8">
 							<div class="form-group">
 								<label for="">Full-Name</label>
-								<input type="text" class="form-control" name="name" id="name" readonly>
+								<input type="text" class="form-control" name="name" id="name" readonly required>
+							</div>
+						</div>
+
+						<div class="col-lg-8">
+							<div class="form-group">
+								<label for="">Session</label>
+								<input type="text" class="form-control" name="session" id="session" readonly required>
+							</div>
+						</div>
+
+						<div class="col-lg-8">
+							<div class="form-group">
+								<label for="">Department</label>
+								<input type="text" class="form-control" name="department" id="department" readonly required>
 							</div>
 						</div>
 
 
 					</div>
 
+					<input type="hidden" id="email" name="email">
+					<input type="hidden" name="matric_number" id="matric_number"> 
+					<input type="hidden" name="orderID" value="345">
+					<input type="hidden" name="amount" value="200000"> {{-- required in kobo --}}
+					{{-- <input type="hidden" name="quantity" value="3"> --}}
+					<input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
+					<input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
+					{{-- works only when using laravel 5.1, 5.2 --}}
+
+					<input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
+
 					<br> <br> <br> <br>
 
 					<div class="row">
 						<div class="col-lg-3 col-lg-offset-3">
 
-						<input type="submit" class="btn btn-success" value="Proceed with payment">
+						<input type="submit" id="submit" class="btn btn-success" value="Proceed with payment">
 							
 						</div>
 					</div>

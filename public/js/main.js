@@ -1,15 +1,22 @@
 $(document).ready(function() {
+    $('#submit').prop('disabled', true);
     $("#matric_number").keyup(function() {
         var val = $("#matric_number").val();
-        var dept = $("select#department").val();
-        var ses = $("select#session").val();
-
+        $("#name").val('Loading...');
+        $("#department").val('Loading...');
+        $("#session").val('Loading...');
+        $('#submit').prop('disabled', true);
         $.ajax({
             url: "name",
             method: "GET",
-            data: {mat: val, department: dept, session: ses},
+            data: {mat: val},
             success: function(data){
-                $("#name").val(data);
+                $("#name").val(data.name);
+                $("#session").val(data.academic);
+                $("#department").val(data.department);
+                $("#email").val(data.email);
+                $('#submit').prop('disabled', false);
+
             } 
         });
     });

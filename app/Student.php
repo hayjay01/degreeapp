@@ -6,15 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    protected $fillable = ['name', 'matric_number', 'department', 'session', 'email', 'phone_number'];
+    protected $fillable = ['name', 'matric_number', 'department_id', 'session_id', 'email', 'phone_number'];
 
-    public function departments()
+    public function department()
     {
-        return $this->hasOne(Department::class);
+        return $this->belongsTo(Department::class);
     }
 
-    public function academicsession()
+    public function session()
     {
-        return $this->hasOne(AcademicSession::class);
+        return $this->belongsTo(AcademicSession::class);
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
     }
 }
