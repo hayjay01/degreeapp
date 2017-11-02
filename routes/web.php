@@ -28,6 +28,7 @@ Route::group(['prefix' => 'mobilization'], function(){
 Route::group(['prefix' => 'director'], function(){
 	Route::match(['get', 'post'], '/login', 'AuthController@getLogin')->name('login');
     Route::post('/login-process', 'AuthController@postLogin')->name('login.process');
+    
 
     Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
         Route::get('/', 'DirectorDashboardController@index')->name('dashboard');

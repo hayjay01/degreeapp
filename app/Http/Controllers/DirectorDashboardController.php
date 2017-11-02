@@ -68,6 +68,8 @@ class DirectorDashboardController extends Controller
      */
     public function allStudent()
     {
+        $students = DB::SELECT('SELECT ');
+        dd($students);
         return view('director.student.index')->with('student', Student::all());
     }
 
