@@ -3,44 +3,7 @@
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2">
 				<form method="POST"  action="{{ route('pay') }}" accept-charset="UTF-8">
-					{{-- {{ csrf_field() }}
-					<div class="row">
-						<div class="col-lg-8">
-							<div class="form-group{{ $errors->has('session') ? ' has-error' : '' }}">
-								<label for="exampleInputEmail1">Choose Session</label>
-								<select class="form-control" id="session" name="session" required>
-								  <option value="">Select Session</option>
-								  @foreach($session as $sessions)
-								  	<option value="{{ $sessions->id }}">{{ $sessions->name }}</option>
-								  @endforeach
-
-								  @if($errors->has('session'))
-								  	<strong>
-										<span class="help-block">{{ $errors->first('session') }}</span>  
-									</strong>
-								  @endif
-								</select>
-							</div>
-						</div>  <br> <br> <br> <br> <br> <br> 
-
-						<div class="col-lg-8">
-							<div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
-								<label for="exampleInputEmail1">Choose Department</label>
-								<select class="form-control" id="department" name="department" required>
-									<option value="">Select Department</option>
-									@foreach($department as $dept)
-										<option value="{{ $dept->id }}">{{ $dept->name }}</option>
-									@endforeach
-
-									@if($errors->has('department'))
-										<strong>
-											<span class="help-block">{{ $errors->first('department') }}</span>
-										</strong>
-									@endif
-								</select>
-							</div>
-						</div>
-					</div> <br> <br> <br> --}}
+					{{ csrf_field() }}					
 
 					<div class="row">
 						<div class="col-lg-8">
@@ -81,7 +44,7 @@
 					</div>
 
 					<input type="hidden" id="email" name="email">
-					<input type="hidden" name="matric_number" id="matric_number"> 
+					<input type="hidden" name="matric_no" id="matric"> 
 					<input type="hidden" name="orderID" value="345">
 					<input type="hidden" name="amount" value="200000"> {{-- required in kobo --}}
 					{{-- <input type="hidden" name="quantity" value="3"> --}}

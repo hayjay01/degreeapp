@@ -15,11 +15,12 @@ $(document).ready(function() {
                 $("#session").val(data.academic);
                 $("#department").val(data.department);
                 $("#email").val(data.email);
+                $("#matric").val(data.matric);
                 $('#submit').prop('disabled', false);
 
             } 
         });
     });
-
+ 
     
 });

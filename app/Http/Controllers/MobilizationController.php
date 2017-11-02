@@ -32,7 +32,7 @@ class MobilizationController extends Controller
     {
         $matric_no = $request->mat;
         $student = Student::where('matric_number', $matric_no)->first();
-        return response()->json(['name' => $student->name, 'academic' => $student->session->name, 'email' => $student->email, 'department' => $student->department->name]);
+        return response()->json(['name' => $student->name, 'matric' => $student->matric_number, 'academic' => $student->session->name, 'email' => $student->email, 'department' => $student->department->name]);
     }
 
 	public function validateStudent(Request $request)

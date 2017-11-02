@@ -11,7 +11,7 @@ use App\Student;
 use App\Payment;
 use Session;
 
-class PaymentController extends Controller
+class PaymentController extends Controller 
 {
 
     /**
@@ -21,12 +21,14 @@ class PaymentController extends Controller
     public function redirectToGateway(Request $request)
     {
         $payment = Payment::where('matric_number', $request->matric_number)->first();
-        if($payment)
+        if(count($payment) !== 0)
         {
             Session::flash('info', 'You have paid already...');
             return redirect()->back();
+        }else{
+            return Paystack::getAuthorizationUrl()->redirectNow();
         }
-        return Paystack::getAuthorizationUrl()->redirectNow();
+        
     }
 
     /**
