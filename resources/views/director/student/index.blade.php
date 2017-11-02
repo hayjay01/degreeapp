@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     @include('sidebar.sidebar')
-    <div class="col-md-9">
+    <div class="col-md-30">
         <div class="panel panel-success">
             <div class="panel-heading">
                 All Students
@@ -17,28 +17,44 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        S/N
+                                        <center>
+                                            S/N
+                                        </center>
                                     </th>
                                     <th>
-                                        Student's Name
+                                        <center>
+                                             Name
+                                        </center>
                                     </th>
                                     <th>
-                                        Student's Email
+                                        <center>
+                                             Email
+                                        </center>
                                     </th>
                                     <th>
-                                        Student's Phone Number
+                                        <center>
+                                             Phone Number
+                                        </center>
                                     </th>
                                     <th>
-                                        Student's Matric Number
+                                        <center>
+                                             Matric Number
+                                        </center>
                                     </th>
                                     <th>
-                                        Student's Department
+                                        <center>
+                                             Department
+                                        </center>
                                     </th>
                                     <th>
-                                        Session
+                                        <center>
+                                            Session
+                                        </center>
                                     </th>
                                     <th>
-                                        Payment Status
+                                        <center>
+                                            Payment Status
+                                        </center>
                                     </th>
                                     <th>EDIT</th>
                                     <th>DELETE</th>
@@ -82,6 +98,5 @@
             </div>
             <div class="panel-footer text-center">Developed by <a href="#">Buildit.com.ng</a></div>
         </div>
-    </div>
 </div>
 @stop

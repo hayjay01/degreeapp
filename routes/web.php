@@ -62,5 +62,8 @@ Route::group(['prefix' => 'director'], function(){
         });
         
         Route::get('/logout', 'DirectorDashboardController@logout')->name('logout');
+        Route::get('import-excel-bulk-upload-format', 'DirectorDashboardController@importExport');
+        Route::get('downloadExcel/{type}', 'DirectorDashboardController@downloadExcel');
+        Route::post('importExcel', 'DirectorDashboardController@importExcel');
     });
 });

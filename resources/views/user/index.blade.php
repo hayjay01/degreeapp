@@ -1,5 +1,6 @@
 @extends('layouts.master')
 	@section('content')
+		<br> <br> <br>
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2">
 				<form method="POST"  action="{{ route('pay') }}" accept-charset="UTF-8">
@@ -17,7 +18,7 @@
 									</strong>
 								@endif
 							</div>
-						</div> <br> <br> <br> <br> <br> <br> 
+						</div>  <br> <br> <br> <br> 
 
 						<div class="col-lg-8">
 							<div class="form-group">
@@ -32,7 +33,6 @@
 								<input type="text" class="form-control" name="session" id="session" readonly required>
 							</div>
 						</div>
-
 						<div class="col-lg-8">
 							<div class="form-group">
 								<label for="">Department</label>
@@ -57,7 +57,7 @@
 					<br> <br> <br> <br>
 
 					<div class="row">
-						<div class="col-lg-3 col-lg-offset-3">
+						<div class="col-lg-3 col-lg-offset-3 col-xs-4 col-xs-offset-3 col-sm-4 col-sm-offset-4">
 
 						<input type="submit" id="submit" class="btn btn-success" value="Proceed with payment">
 							

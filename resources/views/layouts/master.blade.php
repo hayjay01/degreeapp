@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DIRECTORATE OF DEGREE PROGRAMMES (EKITI STATE UNIVERSITY AOCOED) | PORTAL MANAGEMENT SYSTEM</title>
+  <title>DIRECTORATE OF DEGREE PROGRAMMES | PORTAL MANAGEMENT SYSTEM</title>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, 
       initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -21,7 +21,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href=""><i class="glyphicon glyphicon-globe"></i> DIRECTORATE OF DEGREE PROGRAMMES  </a>
+        <a class="navbar-brand" href="" style="color:#5cb85c;"> <b>DIRECTORATE OF DEGREE PROGRAMMES</b>  </a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
