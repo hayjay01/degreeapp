@@ -16,11 +16,13 @@ Route::get('/', function () {
 });
 
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+Route::get('payment-reciept/{id}', 'PaymentController@getReciept')->name('reciept');
 
 Route::group(['prefix' => 'mobilization'], function(){
 	Route::match(['get', 'post'], '/index', 'MobilizationController@index');
     Route::get('/name', 'MobilizationController@getName');
-	Route::match(['get', 'post'], '/index', 'MobilizationController@index')->name('mobilization');
+    // Route::post('/student-validate', 'MobilizationController@validateStudent')->name('validate.formfield');
 });
 
 Route::group(['prefix' => 'director'], function(){
@@ -36,6 +38,9 @@ Route::group(['prefix' => 'director'], function(){
             Route::get('/edit/{id}', 'DirectorDashboardController@editStudent')->name('director.student.edit');
             Route::post('/edit/post/{id}', 'DirectorDashboardController@updateStudent')->name('director.student.update');
             Route::get('/delete/{id}', 'DirectorDashboardController@deleteStudent')->name('director.student.delete');
+            Route::get('/verify-student', 'DirectorDashboardController@verifyPayment')->name('verify.student.payment');
+            Route::get('/verify-student/process', 'DirectorDashboardController@verifyPaymentPost')->name('verify.student.payment.process');
+            Route::get('/verify-student/success/{id}', 'DirectorDashboardController@verifySuccess')->name('verify.success');
         });
 
         Route::group(['prefix' => 'departments'], function() {
@@ -45,7 +50,7 @@ Route::group(['prefix' => 'director'], function(){
             Route::get('/edit/{id}', 'DirectorDashboardController@editDepartment')->name('department.edit');
             Route::post('/edit/post/{id}', 'DirectorDashboardController@updateDepartment')->name('department.update');
             Route::get('/delete/{id}', 'DirectorDashboardController@deleteDepartment')->name('department.delete');
-        });
+        }); 
 
         Route::group(['prefix' => 'session'], function() {
             Route::get('/', 'DirectorDashboardController@allSession')->name('session.all');

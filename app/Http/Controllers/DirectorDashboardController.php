@@ -9,10 +9,12 @@ use Session;
 use App\Student;
 use App\Department;
 use App\AcademicSession;
+use App\Payment;
 use Excel;
 use Illuminate\Support\Facades\Input;
 use DB;
 use Carbon\Carbon;
+
 
 class DirectorDashboardController extends Controller
 {
@@ -277,7 +279,42 @@ class DirectorDashboardController extends Controller
         return redirect()->route('login');
     }
 
+    public function verifyPayment()
+    {
+        return view('director.student.verify');
+    }
 
+    public function verifyPaymentPost(Request $request)
+    {
+        $this->validate($request, [
+            'reference_code' => 'required',
+        ]);
+
+        $payment = Payment::where('reference_code', $request->reference_code)->first();
+        if(!$payment)
+        {
+            Session::flash('error', 'No transaction recorded for this student');
+            return redirect()->back();
+        }
+
+        $student = Student::where('matric_number', $payment->matric_number)->first();
+
+        return view('director.student.student')->with('students', $student);
+    }
+
+    public function verifySuccess($id)
+    {
+        $student = Student::find($id);
+        if($student->payment_status === "SUCCESS")
+        {
+            Session::flash('info', 'You have already verified this student');
+            return redirect()->back();
+        }
+        $student->payment_status = "SUCCESS";
+        $student->save();
+        Session::flash('success', 'Payment verified successfully');
+        return redirect()->back();
+      
     public function FunctionName($value='')
     {
         # code...
@@ -343,6 +380,5 @@ class DirectorDashboardController extends Controller
             
         }
             return back()->with('success',  'All Student were successfully uploaded');
-
     }
 }

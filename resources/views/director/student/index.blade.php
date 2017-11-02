@@ -78,10 +78,10 @@
                                             {{ $students->department->name }}
                                         </td>
                                         <td>
-                                            {{ $students->academicsession->name }}
+                                            {{ $students->session->name }}
                                         </td>
                                         <td>
-                                            Pending...
+                                            {{ $students->payment_status }}
                                         </td>
                                         <td>
                                             <a href="{{ route('director.student.edit', ['id' => $students->id]) }}" class="btn btn-primary btn-xs">EDIT</a>

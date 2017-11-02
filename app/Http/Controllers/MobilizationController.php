@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Department;
 use App\AcademicSession;
+use App\Payment;
 
 class MobilizationController extends Controller
 {
@@ -30,10 +31,19 @@ class MobilizationController extends Controller
 	public function getName(Request $request)
     {
         $matric_no = $request->mat;
-		$dep = $request->department;
-		$ses = $request->session;
-        $student = Student::where([ ['matric_number', $matric_no], ['department_id', $dep], ['session_id', $ses] ])->first();
-        return $student->name;
+        $student = Student::where('matric_number', $matric_no)->first();
+        return response()->json(['name' => $student->name, 'matric' => $student->matric_number, 'academic' => $student->session->name, 'email' => $student->email, 'department' => $student->department->name]);
     }
+
+	public function validateStudent(Request $request)
+	{
+		$this->validate($request, [
+			'session' => 'required',
+			'department' => 'required',
+			'matric_number' => 'required',
+		]);
+
+		return view('user.payment')->with('mat_no', $request->matric_number);
+	}
 
 }

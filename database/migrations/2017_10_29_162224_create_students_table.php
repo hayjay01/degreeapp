@@ -21,6 +21,7 @@ class CreateStudentsTable extends Migration
             $table->string('session_id');
             $table->string('email');
             $table->string('phone_number');
+            $table->string('payment_status')->default('PENDING...');
             $table->timestamps();
         });
     }
