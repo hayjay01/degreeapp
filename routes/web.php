@@ -20,7 +20,7 @@ Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('payment-reciept/{id}', 'PaymentController@getReciept')->name('reciept');
 
 Route::group(['prefix' => 'mobilization'], function(){
-	Route::match(['get', 'post'], '/index', 'MobilizationController@index');
+	Route::match(['get', 'post'], '/index', 'MobilizationController@index')->name('mobilization');
     Route::get('/name', 'MobilizationController@getName');
     // Route::post('/student-validate', 'MobilizationController@validateStudent')->name('validate.formfield');
 });

@@ -68,8 +68,8 @@ class DirectorDashboardController extends Controller
      */
     public function allStudent()
     {
-        $students = DB::SELECT('SELECT ');
-        dd($students);
+        // $students = DB::SELECT('SELECT ');
+        // dd($students);
         return view('director.student.index')->with('student', Student::all());
     }
 
@@ -146,7 +146,7 @@ class DirectorDashboardController extends Controller
 
                 $student->save();
             }
-            Session::flash('success', 'Updated Successfully');
+            Session::flash('success', 'Student Data Updated Successfully');
             return redirect()->route('student.all');
         }
         Session::flash('info', 'No changes made');
@@ -316,11 +316,11 @@ class DirectorDashboardController extends Controller
         $student->save();
         Session::flash('success', 'Payment verified successfully');
         return redirect()->back();
-      
-    public function FunctionName($value='')
-    {
-        # code...
     }
+    // public function FunctionName($value='')
+    // {
+    //     # code...
+    // }
 
     public function downloadExcel($type)
     {
