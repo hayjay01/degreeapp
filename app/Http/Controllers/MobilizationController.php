@@ -12,6 +12,7 @@ class MobilizationController extends Controller
 {
     public function index(Request $r)
     {
+        // dd("k");
     	$method = $r->isMethod('post');
 
     	switch ($method) {
@@ -20,6 +21,7 @@ class MobilizationController extends Controller
     			break;
     		
 			case false:
+                
 				return view('user.index')->with('department', Department::all())
 										 ->with('session', AcademicSession::all());
 										     			
