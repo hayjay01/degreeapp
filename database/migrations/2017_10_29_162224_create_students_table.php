@@ -17,8 +17,8 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('matric_number');
-            $table->string('department_id');
-            $table->string('session_id');
+            $table->string('department_id')->nullable();
+            $table->string('session_id')->nullable();
             $table->string('email');
             $table->string('phone_number');
             $table->string('payment_status')->default('PENDING...');
