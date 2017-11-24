@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
-Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback'); 
 Route::get('payment-reciept/{id}', 'PaymentController@getReciept')->name('reciept');
 
 Route::group(['prefix' => 'mobilization'], function(){

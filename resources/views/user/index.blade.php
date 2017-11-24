@@ -3,7 +3,7 @@
 		<br> <br> <br>
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2">
-				<form method="POST"  action="{{ route('pay') }}" accept-charset="UTF-8">
+				<form method="POST"  action="{{ route('pay') }}" accept-charset="UTF-8"> 
 					{{ csrf_field() }}					
 
 					<div class="row">

@@ -30,7 +30,7 @@
                         <a href="">Upload Students (Batch)</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="">Verify Payments</a>
+                        <a href="{{ route('verify.student.payment') }}">Verify Payments</a>
                     </li>
                     <li class="list-group-item">
                         <a href="{{ route('logout') }}">Logout</a>
