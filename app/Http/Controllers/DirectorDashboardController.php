@@ -335,48 +335,65 @@ class DirectorDashboardController extends Controller
 
     public function importExcel()
     {
+        // dd($request->student_name);    
         if(Input::hasFile('import_file')){
             $path = Input::file('import_file')->getRealPath();
             $data = Excel::load($path, function($reader) {
             })->get();
+//             dd($data);
             $s=0;
             $f=0;
-            if(!empty($data) && $data->count()){
                 $now = Carbon::now('Africa/Lagos');
                 foreach ($data as $key => $value) {
-                    $insert[] = ['name' => $value->student_name,
-                                 'matric_number' => $value->matric_number,
-                                 'department' => $value->department,
-                                 'email' => $value->email,
-                                 'phone_number' => $value->phone_number,
-                                 'session' => $value->session,
-                                 'created_at' => $now, 
-                                 'updated_at' => $now
-                                ];
-
-                    if(!empty($insert)){
-                       $each_save = DB::table('students')->insert($insert);
-                        // dd('Record inserted successfully.');
-                        if ($each_save) {
-                            $s++;
-                        }else{
-                            $f++;
-                            continue;
-                        }
+                    // mapping related department_id of the student with the department table
+                    $retrieved_dept_id = DB::SELECT("SELECT id, name FROM departments WHERE name = '$value->department'");
+//                    dd($value->department);
+                    if (!empty($retrieved_dept_id)) {
+                        $retrieved_dept_id[0]->id;
+                        //pick the first result returned from the database
+                        $retrieved_dept_id = $retrieved_dept_id[0]->id;
+                    }else{
+                        $retrieved_dept_id = null;
                     }
-                }
-                // if(!empty($insert)){
-                //    $each_save = DB::table('students')->insert($insert);
-                //     dd('Record inserted successfully.');
-                //     if ($each_save) {
-                //         $s++;
-                //     }else{
-                //         $f++;
-                //         continue;
-                //     }
-                // }
+
+                    // mapping related session_id of the student with the sessions table
+                    $retrieved_session_id = DB::SELECT("SELECT id, name FROM academic_sessions WHERE name = '$value->session'");
+                    if (!empty($retrieved_session_id)) {
+                        $retrieved_session_id[0]->id;
+                        //pick the first result returned from the database
+                        $retrieved_session_id = $retrieved_session_id[0]->id;
+                    }else{
+                        $retrieved_session_id = null;
+                    }
+//                    dd($retrieved_session_id[5]);
+
+
+                    //checking if the current loop stage of the student dept is found and at the same time, if the session allocated to the student exist
+                    if(!is_null($retrieved_dept_id) && !is_null($retrieved_session_id)){
+
+                        $insert[] = ['name' => $value->name,
+                                     'matric_number' => $value->matric_number,
+                                     'department_id' => $retrieved_dept_id,
+                                     'email' => $value->email,
+                                     'phone_number' => $value->phone_number,
+                                     'session_id' => $retrieved_session_id,
+                                     'created_at' => $now,
+                                     'updated_at' => $now
+                                    ];
+//                        dd($insert);
+
+                        if(!empty($insert)){
+                           $each_save = DB::table('students')->insert($insert);
+                                $s++;
+                        }
+
+                    }else{
+                        $f++;
+                        continue;
+                    }
+
+                }//endforeach or loop
             }
-        }
         if ($f > 0) {
             return back()->with('success',  $s . ' Students Uploaded Successfully. '.$f.' student failed to upload due to some format expected...Try uploading them again.');
             
