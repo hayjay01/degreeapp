@@ -52,6 +52,7 @@ Route::group(['prefix' => 'director'], function(){
             Route::post('/edit/post/{id}', 'DirectorDashboardController@updateDepartment')->name('department.update');
             Route::get('/delete/{id}', 'DirectorDashboardController@deleteDepartment')->name('department.delete');
         }); 
+        
 
         Route::group(['prefix' => 'session'], function() {
             Route::get('/', 'DirectorDashboardController@allSession')->name('session.all');

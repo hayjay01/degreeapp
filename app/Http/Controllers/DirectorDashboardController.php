@@ -25,7 +25,19 @@ class DirectorDashboardController extends Controller
      */
     public function index()
     {
-        return view('director.dashboard.index');
+        // dd("dd");
+        $result = [];
+        $departments = Department::withCount('student')->get();
+        foreach ($departments as $dept) {
+            // $employee_count_per_department = DB::SELECT("select COUNT(id_sys_departments) as numb_of_emp FROM hr_employee_departments WHERE id_sys_departments = '$dept->id' and advance_company_id = '$company_id'");
+            $result[] = [
+                'name' => $dept->name,
+                'y' => $dept->student_count,
+                'drilldown' => $dept->student_count,
+            ];
+        }
+        $all_data = json_encode($result);
+        return view('director.dashboard.index', compact('all_data'));
     }
 
     /**
